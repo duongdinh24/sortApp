@@ -14,19 +14,19 @@ namespace quickSortapp
 {
     public partial class Form_main : Form
     {
-        #region Khai báo biến
+        #region KHAI BÁO BIẾN
 
         public static Button[] node1;   // Biến minh họa mảng
         public static int so_phan_tu;   // Số phần tử của mảng
         public static Label[] chiSo;   // Chỉ số vị trí của mảng
         public static int[] a;         // Mảng a
-        int toc_Do=1;                    // Độ trễ của di chuyểnm
+        int toc_Do=1;                  // Tốc độ, tối đa 10 cấp
         Boolean tang = true;     // Kiểu sắp xếp
         Boolean da_Tao_Mang = false;
         Boolean da_Tao_GT = false;
         Boolean chay_het = false;
-        Boolean kt_tam_dung = false; //Biến kiểm tra đã tạo mảng và kiểm tra tạm dừng
-        Boolean sap_Xep_Tung_Buoc;        // Biến kiểm tra sắp xếp từng bước hay nhanh
+        Boolean kt_tam_dung = false;     //Biến kiểm tratạm dừng
+        Boolean sap_Xep_Tung_Buoc= false;        // Biến kiểm tra sắp xếp từng bước hay nhanh
         CodeC code_C = new CodeC();       // Code C/C++ cho thuật toán
         int i;    // Biến này dùng nhiều
 
@@ -58,9 +58,9 @@ namespace quickSortapp
             lbl_right.Visible = false;
             lbl_left.Visible = false;
             lbl_pivot.Visible = false;
-            ckb_tungbuoc.Enabled = false;
-            rad_giam.Enabled = false;
-            rad_tang.Enabled = false;
+            ckb_tungbuoc.Enabled = true;
+            rad_giam.Enabled = true;
+            rad_tang.Enabled = true;
         }
 
         private void Form_main_Load(object sender, EventArgs e)
@@ -147,6 +147,18 @@ namespace quickSortapp
             btn_random.Enabled = true;
             btn_readfile.Enabled = true;
 
+            rad_bubblesort.Enabled = true;
+            rad_insertion_sort.Enabled = true;
+            rad_mergesort.Enabled = true;
+            rad_quicksort.Enabled = true;
+            rad_heapsort.Enabled = true;
+            rad_selections_sort.Enabled = true;
+
+            rad_tang.Enabled = true;
+            rad_giam.Enabled = true;
+
+            lbl_status.Visible = true;
+            lbl_status.Text = "Đã tạo mảng";
         }
 
         // Hàm reset giá trị của các node về 0;
@@ -187,10 +199,15 @@ namespace quickSortapp
 
         private void zoomcode_EditValueChanged(object sender, EventArgs e)
         {
-            if (zoomcode.Value > 8)
+            Application.DoEvents();
+            this.Invoke((MethodInvoker)delegate
             {
-                lb_list_code.Font = new Font("Consolas", zoomcode.Value + 5, FontStyle.Regular);
-            }
+                if (zoomcode.Value > 8)
+                {
+                    lb_list_code.Font = new Font("Consolas", zoomcode.Value + 5, FontStyle.Regular);
+                }
+            });
+            
 
         }
 
@@ -215,6 +232,7 @@ namespace quickSortapp
             da_Tao_GT = true;
             btn_sapxep.Enabled = true;
             btn_break.Enabled = true;
+            lbl_status.Text = "Đã tạo giá trị";
         }
 
         // Nhập dữ liệu từ file cùng với thư mục chứa file.exe
@@ -255,6 +273,8 @@ namespace quickSortapp
             ckb_tungbuoc.Enabled = true;
             da_Tao_GT = true;
             btn_sapxep.Enabled = true;
+            btn_break.Enabled = true;
+            lbl_status.Text = "Đã tạo giá trị";
 
         }
 
@@ -263,11 +283,13 @@ namespace quickSortapp
         {
             Form_2 f2 = new Form_2();
             f2.ShowDialog();
+            lbl_status.Text = "Đã tạo giá trị";
             rad_tang.Enabled = true;
             rad_giam.Enabled = true;
             ckb_tungbuoc.Enabled = true;
             da_Tao_GT = true;
             btn_sapxep.Enabled = true;
+            btn_break.Enabled = true;
         }
         #endregion
 
@@ -306,7 +328,6 @@ namespace quickSortapp
             x = y;
             y = temp;
         }
-        
         // Hàm dừng chương trình
         public void Play_or_Stop()
         {
@@ -344,6 +365,53 @@ namespace quickSortapp
             node1[t2] = Temp;
         }
 
+        // Hàm vô hiệu hóa các nút khởi tạo khi ctrinh chạy
+        public void is_running()
+        {
+            btn_taomang.Enabled = false;
+            btn_random.Enabled = false;
+            btn_readfile.Enabled = false;
+            btn_nhaptay.Enabled = false;
+
+            rad_bubblesort.Enabled = false;
+            rad_insertion_sort.Enabled = false;
+            rad_mergesort.Enabled = false;
+            rad_quicksort.Enabled = false;
+            rad_heapsort.Enabled = false;
+            rad_selections_sort.Enabled = false;
+
+            rad_tang.Enabled = false;
+            rad_giam.Enabled = false;
+            ckb_tungbuoc.Enabled = false;
+        }
+
+        // Hàm hoàn thành sắp xếp
+        public void complete()
+        {
+            if (tang)
+                quickSort(a, 0, so_phan_tu - 1);
+            else
+                insert_Sort(a,so_phan_tu);
+            for (int i = 0; i < so_phan_tu; i++)
+            {
+                set_node_color(node1[i], Properties.Resources.img_done);
+                node1[i].Text = a[i].ToString();
+            }
+            lbl_status.Text = "Đã sắp xếp xong!";
+            lbl_pivot.Text = " ";
+            lbl_left.Text = " ";
+            lbl_right.Text = " ";
+            btn_taomang.Enabled = true;
+            lbl_right.Visible = false;
+            lbl_left.Visible = false;
+            lbl_pivot.Visible = false;
+            btn_break.Enabled = false;
+            btn_sapxep.Enabled = false;
+            btn_random.Enabled = false;
+            btn_readfile.Enabled = false;
+            btn_nhaptay.Enabled = false;
+
+        }
         #endregion
 
         #region CÁC HÀM DI CHUYỂN
@@ -394,7 +462,7 @@ namespace quickSortapp
                         }
                         else
                         {
-                            ms = 500 / dodai;
+                            ms = 600 / dodai;
                         }
 
                         for (int j = 0; j < dodai; j++)
@@ -471,7 +539,7 @@ namespace quickSortapp
                for(int j =0; j < 100; j++)
                {
                    node.Top -= 1;  // Giảm trục Y của node, làm cho node đi lên trên
-                   wait_time(5);   // Chờ 5 mili giây rồi tiếp tục thực hiện
+                   wait_time(3*toc_Do);   // Chờ 5 mili giây rồi tiếp tục thực hiện
                }
                node.Refresh();
            });
@@ -488,10 +556,33 @@ namespace quickSortapp
                 for (int j = 0; j < 100; j++)
                 {
                     node.Top += 1;  // Giảm trục Y của node, làm cho node đi lên trên
-                    wait_time(5);
+                    wait_time(3*toc_Do);
                 }
                 node.Refresh();
             });
+        }
+
+        // Hàm node qua trái
+        public void to_left(Control node, int vt_cu, int vt_moi) // Tên node, vị trí cũ, vị trí mới
+        {
+            int s = 2*(vt_cu - vt_moi) * (kich_Thuoc + khoang_Cach); // độ dài đường đi
+            for( int i = 0; i < s; i++)
+            {
+                node.Left -= 1;
+                i++;
+                wait_time(toc_Do * (1000 / s));
+            }
+        }
+
+        public void to_right(Control node, int vt_cu, int vt_moi) 
+        {
+            int s = 2*(vt_moi - vt_cu) * (kich_Thuoc + khoang_Cach); // độ dài đường đi
+            for (int i = 0; i < s; i++)
+            {
+                node.Left += 1;
+                i++;
+                wait_time(toc_Do * (1000 / s));
+            }
         }
         #endregion
 
@@ -523,31 +614,23 @@ namespace quickSortapp
             }
         }
 
-        // Quicksort theo chiều giảm cho một mảng
-        public void quickSort_giam(int[] a, int low, int high)
+        // sắp xếp giảm dần dùng insert
+        public void insert_Sort(int[] a, int n) // Nhưng lại dùng insertion sort
         {
-            if (low >= high)
-                return;
-            else
+            for(int i =1; i<n; i++)
             {
-                int pivot = a[high];
-                int right = high - 1;
-                int left = low;
-                while (true)
+                int temp = a[i];
+                int j = i;
+                while(j>0 && temp > a[j - 1])
                 {
-                    while (a[left] > pivot && left <= right && left < so_phan_tu - 1) left++;
-                    while (a[right] < pivot && right >= left && right > 0) right--;
-                    if (left >= right)
-                        break;
-                    swap(ref a[left], ref a[right]);
-                    left++;
-                    right--;
+                    a[j] = a[j - 1];
+                    j--;
                 }
-                swap(ref a[left], ref a[high]);
-                quickSort(a, low, left - 1);
-                quickSort(a, left + 1, high);
+                a[j] = temp;
             }
+
         }
+
         // Hàm sắp xếp các node theo thuật toán quickSort tăng
         public void quickSort_Node_increase(int low, int high)
         {
@@ -624,7 +707,7 @@ namespace quickSortapp
                     }
 
                     swap(ref a[left], ref a[right]);
-                    lb_list_code.SelectedIndex = 24;
+                    lb_list_code.SelectedIndex = 15;
                     lbl_status.Text = "Status: swap(a[" + left + "], a[" + right + "]";
                     swap_Node(node1[left], node1[right]);
                     swap_button(left, right);
@@ -651,8 +734,8 @@ namespace quickSortapp
                 }
 
                 swap(ref a[left], ref a[high]);
-                lb_list_code.SelectedIndex = 24;
-                lbl_status.Text = "Status: swap(a[" + left + "], a[" + high + "])";
+                lb_list_code.SelectedIndex = 18;
+                lbl_status.Text = "Status: swap(left, pivot])";
                 swap_Node(node1[left], node1[high]);
                 wait_time(1000 * toc_Do);
                 swap_button(left, high);
@@ -669,45 +752,295 @@ namespace quickSortapp
             //quickSort(a, 0, so_phan_tu - 1);
         }
         
-        public void quickSort_Node_decrease()
+        //quickSort tăng giảm
+        public void quickSort_Node_decrease(int low, int high)
         {
+            if (low >= high)
+            {
+                lbl_status.Text = "Status: return";
+                return;
+            }
 
+            else
+            {
+                int pivot = a[high];
+                lbl_pivot.Text = "pivot = a[" + high + "]";
+                // Hiển thị pivot
+                set_node_color(node1[high], Properties.Resources.img_pivot);    // Đổi màu nút pivot
+                lb_list_code.SelectedIndex = 6;                                 // Cho code C nhảy đến dòng 6
+                wait_time(1000 * toc_Do);
+
+                int left = low;
+                lbl_left.Text = "left = a[" + left + "]";                       // Hiển thị left
+                set_node_color(node1[left], Properties.Resources.img_done);   // Đổi màu left
+                lb_list_code.SelectedIndex = 8;
+                wait_time(1000 * toc_Do);
+
+                int right = high - 1;
+                lbl_right.Text = "right = a[" + right + "]";                    // Hiển thị right
+                set_node_color(node1[right], Properties.Resources.img_select);   // Đổi màu nút right
+                lb_list_code.SelectedIndex = 7;
+                wait_time(1000 * toc_Do);
+
+
+                lbl_status.Text = "Status: phân hoạch a[" + left + "], a[" + right + "]";
+                wait_time(1000 * toc_Do);
+
+
+                while (true)
+                {
+                    while (a[left] > pivot && left <= right && left < so_phan_tu)
+                    {
+                        wait_time(1000);
+                        left++;
+                        lbl_status.Text = "Status: left++";
+                        lbl_left.Text = "left = a[" + left + "]";
+                        lb_list_code.SelectedIndex = 11;                                       // Cho code C nhảy đến dòng 11
+                        set_node_color(node1[left - 1], Properties.Resources.img_simple);// Xóa màu node left cũ
+                        if (left < so_phan_tu)
+                            set_node_color(node1[left], Properties.Resources.img_done);       // Tạo màu node left mới
+                    }
+
+
+                    while (a[right] < pivot && right >= left && right > 0)
+                    {
+                        wait_time(1000);
+                        right--;
+                        lbl_status.Text = "Status: right--";
+                        lbl_right.Text = "right = a[" + right + "]";
+                        lb_list_code.SelectedIndex = 12;
+                        set_node_color(node1[right + 1], Properties.Resources.img_simple);
+                        if (right >= 0)
+                            set_node_color(node1[right], Properties.Resources.img_select);
+                    }
+                    if (left >= right)
+                    {
+                        lb_list_code.SelectedIndex = 14;
+                        lbl_status.Text = "Status: break";
+                        lbl_pivot.Text = "pivot = _ _";
+                        lbl_right.Text = "right = _ _";
+                        lbl_left.Text = "left = _ _";
+                        set_node_color(node1[high], Properties.Resources.img_simple);
+                        set_node_color(node1[left], Properties.Resources.img_simple);
+                        set_node_color(node1[right], Properties.Resources.img_simple);
+                        wait_time(1000 * toc_Do);
+                        break;
+                    }
+
+                    swap(ref a[left], ref a[right]);
+                    lb_list_code.SelectedIndex = 15;
+                    lbl_status.Text = "Status: swap(a[" + left + "], a[" + right + "]";
+                    swap_Node(node1[left], node1[right]);
+                    swap_button(left, right);
+                    wait_time(1000 * toc_Do);
+
+                    left++;
+                    lb_list_code.SelectedIndex = 16;
+                    lbl_status.Text = "Status: left++";
+                    lbl_left.Text = "left = a[" + left + "]";
+                    set_node_color(node1[left - 1], Properties.Resources.img_simple);      // Xóa màu node left cũ
+                    if (left < so_phan_tu)
+                        set_node_color(node1[left], Properties.Resources.img_done);           // Gán màu node left mới
+                    wait_time(1000 * toc_Do);
+
+                    right--;
+                    lb_list_code.SelectedIndex = 17;
+                    lbl_status.Text = "Status: right--";
+                    lbl_right.Text = "right = a[" + right + "]";
+                    if (right >= 0)
+                        set_node_color(node1[right], Properties.Resources.img_select);    // Gán màu node right mới
+                    set_node_color(node1[right + 1], Properties.Resources.img_simple);    // Xóa màu node right
+                    wait_time(1000 * toc_Do);
+
+                }
+
+                swap(ref a[left], ref a[high]);
+                lb_list_code.SelectedIndex = 18;
+                lbl_status.Text = "Status: swap(left, pivot])";
+                swap_Node(node1[left], node1[high]);
+                wait_time(1000 * toc_Do);
+                swap_button(left, high);
+                set_node_color(node1[high], Properties.Resources.img_simple);
+                set_node_color(node1[left], Properties.Resources.img_simple);
+                set_node_color(node1[right], Properties.Resources.img_simple);
+                wait_time(1000 * toc_Do);
+
+                quickSort_Node_decrease(low, left - 1);
+                wait_time(1000 * toc_Do);
+                quickSort_Node_decrease(left + 1, high);
+            }
+        }
+
+        // Hàm sắp xếp insertion sort node tăng
+        public void insertion_Sort_Node()
+        {
+            int j, x;
+            set_node_color(node1[0], Properties.Resources.img_done);
+            for (int i = 1; i < so_phan_tu; i++)
+            {
+                lbl_status.Text = "Chèn a[" + i.ToString() + "]";
+                lbl_pivot.Text = "i = " + i.ToString();
+                x = a[i];
+                lbl_right.Text = "x = " + a[i].ToString();
+                lb_list_code.SelectedIndex = 5;
+                wait_time(1000 * toc_Do);
+
+                Button node_tam = node1[i];
+                set_node_color(node_tam, Properties.Resources.img_pivot);
+                if(x < a[i-1] && i > 0)
+                    go_up(node_tam, i);
+
+                j = i;
+                lbl_left.Text = "j =" + j.ToString();
+                lb_list_code.SelectedIndex = 7;
+                wait_time(toc_Do * 500);
+
+                while (j > 0 && x < a[j - 1])
+                {
+                    a[j] = a[j - 1];
+                    lb_list_code.SelectedIndex = 8;
+                    lbl_status.Text = "a[j] = a[j-1]";
+
+                    to_right(node1[j - 1], j - 1, j);
+                    swap_button(j-1, j);
+                    wait_time(toc_Do *500);
+
+                    lb_list_code.SelectedIndex = 9;
+                    j--;
+                    lbl_status.Text = "j--";
+                    lbl_left.Text = "j =" + j.ToString();
+                    wait_time(1000 * toc_Do);
+                }
+                if (j != i)
+                {
+                    a[j] = x;
+                    lbl_status.Text = "a[j] = x";
+                    lb_list_code.SelectedIndex = 11;
+                    to_left(node_tam, i, j);
+                    go_down(node_tam, j);
+                    node1[j] = node_tam;
+                    wait_time(1000 * toc_Do);
+                }
+                else
+                    wait_time(1000 * toc_Do);
+                set_node_color(node1[j], Properties.Resources.img_done);
+            }
+        }
+
+        // Hàm sắp xếp insertion sort node giảm
+        public void insertion_Sort_Node_decrease()
+        {
+            int j, x;
+            set_node_color(node1[0], Properties.Resources.img_done);
+            for (int i = 1; i < so_phan_tu; i++)
+            {
+                lbl_status.Text = "Chèn a[" + i.ToString() + "]";
+                lbl_pivot.Text = "i = " + i.ToString();
+                x = a[i];
+                lbl_right.Text = "x = " + a[i].ToString();
+                lb_list_code.SelectedIndex = 5;
+                wait_time(1000 * toc_Do);
+
+                Button node_tam = node1[i];
+                set_node_color(node_tam, Properties.Resources.img_pivot);
+                if (x > a[i - 1] && i > 0)
+                    go_up(node_tam, i);
+
+                j = i;
+                lbl_left.Text = "j =" + j.ToString();
+                lb_list_code.SelectedIndex = 7;
+                wait_time(toc_Do * 500);
+
+                while (j > 0 && x > a[j - 1])
+                {
+                    a[j] = a[j - 1];
+                    lb_list_code.SelectedIndex = 8;
+                    lbl_status.Text = "a[j] = a[j-1]";
+
+                    to_right(node1[j - 1], j - 1, j);
+                    swap_button(j - 1, j);
+                    wait_time(toc_Do * 500);
+
+                    lb_list_code.SelectedIndex = 9;
+                    j--;
+                    lbl_status.Text = "j--";
+                    lbl_left.Text = "j =" + j.ToString();
+                    wait_time(1000 * toc_Do);
+                }
+                if (j != i)
+                {
+                    a[j] = x;
+                    lbl_status.Text = "a[j] = x";
+                    lb_list_code.SelectedIndex = 11;
+                    to_left(node_tam, i, j);
+                    go_down(node_tam, j);
+                    node1[j] = node_tam;
+                    wait_time(1000 * toc_Do);
+                }
+                else
+                    wait_time(1000 * toc_Do);
+                set_node_color(node1[j], Properties.Resources.img_done);
+            }
         }
         #endregion
 
-        public void complete()
-        {
-            for(int i =0; i < so_phan_tu; i++)
-            {
-                set_node_color(node1[i], Properties.Resources.img_done);
-            }
-            lbl_right.Visible = false;
-            lbl_left.Visible = false;
-            lbl_pivot.Visible = false;
-
-        }
         #region TÍNH NĂNG SẮP XẾP CLICK
+        //private void btn_sapxep_Click(object sender, EventArgs e)
+        //{
+        //    if (da_Tao_GT)
+        //    {
+        //        //Thread t = new Thread(() => { go_up(node1[0], 0); });
+        //        //t.IsBackground = true;
+        //        //t.Start();
+        //        //Application.DoEvents();
+        //        //this.Invoke((MethodInvoker)delegate
+        //        //{
+        //        //    go_up(node1[0], 0);
+        //        //});
+        //        lbl_status.Visible = true;
+        //        lbl_left.Visible = true;
+        //        lbl_pivot.Visible = true;
+        //        lbl_right.Visible = true;
+        //        quickSort_Node_increase(0, so_phan_tu - 1);
+        //        lbl_status.Text = "Status: Đã sắp xếp xong";
+        //        complete();
+        //    }
+        //}
+
         private void btn_sapxep_Click(object sender, EventArgs e)
         {
+            if (rad_tang.Checked == true)
+                tang = true;
+            else
+                tang = false;
 
-            if (da_Tao_GT)
+            if (ckb_tungbuoc.Checked == true)
             {
-
-                //Thread t = new Thread(() => { go_up(node1[0], 0); });
-                //t.IsBackground = true;
-                //t.Start();
-
-                //Application.DoEvents();
-                //this.Invoke((MethodInvoker)delegate
-                //{
-                //    go_up(node1[0], 0);
-                //});
-                lbl_status.Visible = true;
-                lbl_left.Visible = true;
                 lbl_pivot.Visible = true;
+                lbl_left.Visible = true;
                 lbl_right.Visible = true;
-                quickSort_Node_increase(0, so_phan_tu - 1);
-                lbl_status.Text = "Status: Đã sắp xếp xong";
+                is_running();
+                if (rad_quicksort.Checked == true)
+                {
+                    if (tang)
+                        quickSort_Node_increase(0, so_phan_tu - 1);
+                    else
+                        quickSort_Node_decrease(0, so_phan_tu - 1);
+                    
+                }
+                if(rad_insertion_sort.Checked == true)
+                {
+                    if (tang)
+                        insertion_Sort_Node();
+                    else
+                        insertion_Sort_Node_decrease();
+
+
+                }
+                complete();
+            }
+            else
+            {
                 complete();
             }
 
@@ -716,16 +1049,8 @@ namespace quickSortapp
 
         private void btn_break_Click(object sender, EventArgs e)
         {
-                quickSort(a, 0, so_phan_tu - 1);
-                
-                tao_Mang(150, Properties.Resources.img_done);
-        }
-
-        private void btn_sapxep_Click_1(object sender, EventArgs e)
-        {
-            btn_sapxep.Image = Properties.Resources.img_pause;
-            quickSort_Node_increase(0, so_phan_tu -1);
-
+            insertion_Sort_Node();
+            //complete();
         }
     }
 }

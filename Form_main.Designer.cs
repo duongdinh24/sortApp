@@ -199,12 +199,12 @@ namespace quickSortapp
             // 
             // lb_list_code
             // 
-            this.lb_list_code.Font = new System.Drawing.Font("Consolas", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_list_code.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_list_code.FormattingEnabled = true;
-            this.lb_list_code.ItemHeight = 15;
+            this.lb_list_code.ItemHeight = 20;
             this.lb_list_code.Location = new System.Drawing.Point(1, 60);
             this.lb_list_code.Name = "lb_list_code";
-            this.lb_list_code.Size = new System.Drawing.Size(626, 214);
+            this.lb_list_code.Size = new System.Drawing.Size(626, 204);
             this.lb_list_code.TabIndex = 53;
             // 
             // grb_codec
@@ -329,6 +329,7 @@ namespace quickSortapp
             this.rad_tang.TabStop = true;
             this.rad_tang.Text = "Sắp xếp tăng";
             this.rad_tang.UseVisualStyleBackColor = true;
+            this.rad_tang.CheckedChanged += new System.EventHandler(this.Form_main_Load);
             // 
             // grb_control
             // 
@@ -343,7 +344,7 @@ namespace quickSortapp
             this.grb_control.Size = new System.Drawing.Size(200, 265);
             this.grb_control.TabIndex = 56;
             this.grb_control.TabStop = false;
-            this.grb_control.Text = "s";
+            this.grb_control.Text = "Điều khiển";
             // 
             // btn_sapxep
             // 
@@ -353,7 +354,7 @@ namespace quickSortapp
             this.btn_sapxep.Size = new System.Drawing.Size(54, 54);
             this.btn_sapxep.TabIndex = 4;
             this.btn_sapxep.UseVisualStyleBackColor = true;
-            this.btn_sapxep.Click += new System.EventHandler(this.btn_sapxep_Click_1);
+            this.btn_sapxep.Click += new System.EventHandler(this.btn_sapxep_Click);
             // 
             // btn_break
             // 
@@ -363,10 +364,13 @@ namespace quickSortapp
             this.btn_break.Size = new System.Drawing.Size(54, 54);
             this.btn_break.TabIndex = 3;
             this.btn_break.UseVisualStyleBackColor = true;
+            this.btn_break.Click += new System.EventHandler(this.btn_break_Click);
             // 
             // ckb_tungbuoc
             // 
             this.ckb_tungbuoc.AutoSize = true;
+            this.ckb_tungbuoc.Checked = true;
+            this.ckb_tungbuoc.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckb_tungbuoc.Font = new System.Drawing.Font("Consolas", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ckb_tungbuoc.Location = new System.Drawing.Point(16, 108);
             this.ckb_tungbuoc.Name = "ckb_tungbuoc";
