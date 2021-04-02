@@ -80,7 +80,7 @@ namespace quickSortapp
             this.lbl_Tieude.Name = "lbl_Tieude";
             this.lbl_Tieude.Size = new System.Drawing.Size(779, 191);
             this.lbl_Tieude.TabIndex = 0;
-            this.lbl_Tieude.Text = "Mô phỏng thuật toán sắp xếp Quicksort";
+            this.lbl_Tieude.Text = "Mô phỏng các thuật toán sắp xếp";
             this.lbl_Tieude.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // grb_khoitaomang
@@ -462,7 +462,7 @@ namespace quickSortapp
             this.Name = "Form_main";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = " ";
+            this.Text = "sortApp";
             this.Load += new System.EventHandler(this.Form_main_Load);
             this.grb_khoitaomang.ResumeLayout(false);
             this.grb_khoitaomang.PerformLayout();

@@ -891,7 +891,7 @@ namespace quickSortapp
                     go_up(node_tam, i);
 
                 j = i;
-                lbl_left.Text = "j =" + j.ToString();
+                lbl_left.Text = "j = " + j.ToString();
                 lb_list_code.SelectedIndex = 7;
                 wait_time(toc_Do * 500);
 
@@ -908,7 +908,7 @@ namespace quickSortapp
                     lb_list_code.SelectedIndex = 9;
                     j--;
                     lbl_status.Text = "j--";
-                    lbl_left.Text = "j =" + j.ToString();
+                    lbl_left.Text = "j = " + j.ToString();
                     wait_time(1000 * toc_Do);
                 }
                 if (j != i)
@@ -947,7 +947,7 @@ namespace quickSortapp
                     go_up(node_tam, i);
 
                 j = i;
-                lbl_left.Text = "j =" + j.ToString();
+                lbl_left.Text = "j = " + j.ToString();
                 lb_list_code.SelectedIndex = 7;
                 wait_time(toc_Do * 500);
 
@@ -964,7 +964,7 @@ namespace quickSortapp
                     lb_list_code.SelectedIndex = 9;
                     j--;
                     lbl_status.Text = "j--";
-                    lbl_left.Text = "j =" + j.ToString();
+                    lbl_left.Text = "j = " + j.ToString();
                     wait_time(1000 * toc_Do);
                 }
                 if (j != i)
@@ -982,6 +982,138 @@ namespace quickSortapp
                 set_node_color(node1[j], Properties.Resources.img_done);
             }
         }
+
+        // Hàm sắp xếp bubble sort cho node theo chiều tăng
+        public void bubble_Sort_node()
+        {
+            for (int i = 0; i < so_phan_tu - 1; i++)
+            {
+                lbl_pivot.Text = "i = " + i.ToString();
+                lb_list_code.SelectedIndex = 3;
+
+                for (int j = 0; j < so_phan_tu - i - 1; j++)
+                {
+                    lb_list_code.SelectedIndex = 5;
+                    set_node_color(node1[j], Properties.Resources.img_select); // Sét màu cho phần tử j đang xét
+                    wait_time(toc_Do * 500);
+                    
+                    lbl_left.Text = "j = " + j.ToString();
+                    lbl_status.Text = "So sánh a[" + j.ToString() + "] và a[" + (j + 1).ToString() + "]";
+                    wait_time(toc_Do * 1000);
+
+                    if (a[j] > a[j + 1])
+                    {
+                        lbl_status.Text = "swap(a[" + j.ToString() + "] và a[" + (j + 1).ToString() + "])";
+                        swap(ref a[j], ref a[j + 1]);
+                        swap_Node(node1[j], node1[j + 1]);
+                        swap_button(j, j + 1);
+                        // Sau khi swap button nó tự đổi màu, nên mình phài đặt màu lại
+                        set_node_color(node1[j+1], Properties.Resources.img_select);
+                        set_node_color(node1[j], Properties.Resources.img_simple);
+                        wait_time(500 * toc_Do);
+                        lbl_status.Text = "j++";
+                    }
+
+                    else  // Nếu không swap thì đổi màu!
+                    {
+                        lbl_status.Text = "j++";
+                        set_node_color(node1[j], Properties.Resources.img_simple);
+                        set_node_color(node1[j+1], Properties.Resources.img_select);
+                        wait_time(500 * toc_Do);
+                    }
+
+                    lbl_status.Text = " ";
+
+                    if(j + 1 == so_phan_tu - i -1)
+                    {
+                        set_node_color(node1[j + 1], Properties.Resources.img_done);
+                        wait_time(500 * toc_Do);
+                    }
+                         
+                }
+
+                lbl_status.Text = "i++";
+
+            }
+        }
+
+        // Hàm sắp xếp nổi bọt giảm
+        public void bubble_Sort_node_decrease()
+        {
+            for (int i = 0; i < so_phan_tu - 1; i++)
+            {
+                lbl_pivot.Text = "i = " + i.ToString();
+                lb_list_code.SelectedIndex = 3;
+
+                for (int j = 0; j < so_phan_tu - i - 1; j++)
+                {
+                    lb_list_code.SelectedIndex = 5;
+                    set_node_color(node1[j], Properties.Resources.img_select); // Sét màu cho phần tử j đang xét
+                    wait_time(toc_Do * 500);
+
+                    lbl_left.Text = "j = " + j.ToString();
+                    lbl_status.Text = "So sánh a[" + j.ToString() + "] và a[" + (j + 1).ToString() + "]";
+                    wait_time(toc_Do * 1000);
+
+                    if (a[j] < a[j + 1])
+                    {
+                        lbl_status.Text = "swap(a[" + j.ToString() + "] và a[" + (j + 1).ToString() + "])";
+                        swap(ref a[j], ref a[j + 1]);
+                        swap_Node(node1[j], node1[j + 1]);
+                        swap_button(j, j + 1);
+                        // Sau khi swap button nó tự đổi màu, nên mình phài đặt màu lại
+                        set_node_color(node1[j + 1], Properties.Resources.img_select);
+                        set_node_color(node1[j], Properties.Resources.img_simple);
+                        wait_time(500 * toc_Do);
+                        lbl_status.Text = "j++";
+                    }
+
+                    else  // Nếu không swap thì đổi màu!
+                    {
+                        lbl_status.Text = "j++";
+                        set_node_color(node1[j], Properties.Resources.img_simple);
+                        set_node_color(node1[j + 1], Properties.Resources.img_select);
+                        wait_time(500 * toc_Do);
+                    }
+
+                    lbl_status.Text = " ";
+
+                    if (j + 1 == so_phan_tu - i - 1)
+                    {
+                        set_node_color(node1[j + 1], Properties.Resources.img_done);
+                        wait_time(500 * toc_Do);
+                    }
+
+                }
+
+                lbl_status.Text = "i++";
+
+            }
+        }
+
+        // Hàm sắp xếp chọn node - Selection sort chiều tăng 
+        public void selection_Sort_node()
+        {
+            int min;
+            for (int i = 0; i < so_phan_tu - 1; i++)
+            {
+                min = i;
+                for (int j = i; j < so_phan_tu; j++)
+                {
+                    if (a[j] < a[i])
+                        min = j;
+                }
+
+                if (min != i)
+                {
+                    swap(ref a[i], ref a[min]);
+                    swap_Node(node1[i], node1[min]);
+                    swap_button(i, min);
+                }
+                    
+            }
+        }
+
         #endregion
 
         #region TÍNH NĂNG SẮP XẾP CLICK
@@ -1020,6 +1152,7 @@ namespace quickSortapp
                 lbl_left.Visible = true;
                 lbl_right.Visible = true;
                 is_running();
+
                 if (rad_quicksort.Checked == true)
                 {
                     if (tang)
@@ -1028,6 +1161,7 @@ namespace quickSortapp
                         quickSort_Node_decrease(0, so_phan_tu - 1);
                     
                 }
+
                 if(rad_insertion_sort.Checked == true)
                 {
                     if (tang)
@@ -1037,8 +1171,16 @@ namespace quickSortapp
 
 
                 }
+                if(rad_bubblesort.Checked == true)
+                {
+                    if (tang)
+                        bubble_Sort_node();
+                    else
+                        bubble_Sort_node_decrease();
+                }
                 complete();
             }
+
             else
             {
                 complete();
@@ -1049,7 +1191,7 @@ namespace quickSortapp
 
         private void btn_break_Click(object sender, EventArgs e)
         {
-            insertion_Sort_Node();
+            selection_Sort_node();
             //complete();
         }
     }
