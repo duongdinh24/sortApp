@@ -35,13 +35,14 @@ namespace quickSortapp
         int kich_Thuoc;             // Kích thước node
         int co_Chu;                 // Cỡ chữ node
         int le_Node;                // Căn lề node
+        int le_tren;                // Lề trên cho node
         #endregion
 
         // Hàm này tự chạy khi khởi động Form
         public Form_main()
         {
             InitializeComponent();
-            code_C.quicksort(lb_list_code, tang);  // Tải code C/C++ vào listBox
+            code_C.bubbleSort(lb_list_code, tang);  // Tải code C/C++ vào listBox
 
             // Vô hiệu hóa các lable, button, checkbox, Radiobutton
             btn_break.Enabled = false;
@@ -412,6 +413,74 @@ namespace quickSortapp
             btn_nhaptay.Enabled = false;
 
         }
+        #endregion
+
+
+        #region KHU VỰC CÁC Radiobutton, Checkbox click
+
+        private void rad_tang_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rad_tang.Checked == true)
+                tang = true;
+            else
+                tang = false;
+            lb_list_code.Items.Clear();
+            lb_list_code.Items.Clear();
+            if (rad_bubblesort.Checked == true)
+                code_C.bubbleSort(lb_list_code, tang);
+            if (rad_selections_sort.Checked == true)
+                code_C.selectionSort(lb_list_code, tang);
+            if (rad_insertion_sort.Checked == true)
+                code_C.insertionSort(lb_list_code, tang);
+            if (rad_quicksort.Checked == true)
+                code_C.quicksort(lb_list_code, tang);
+            if (rad_mergesort.Checked == true)
+                code_C.mergeSort(lb_list_code, tang);
+            if (rad_heapsort.Checked == true)
+                code_C.heapSort(lb_list_code, tang);
+        }
+
+        private void rad_bubblesort_CheckedChanged(object sender, EventArgs e)
+        {
+            lb_list_code.Items.Clear();
+            if(rad_bubblesort.Checked == true)
+                code_C.bubbleSort(lb_list_code, tang);
+        }
+
+        private void rad_selections_sort_CheckedChanged(object sender, EventArgs e)
+        {
+            lb_list_code.Items.Clear();
+            if (rad_selections_sort.Checked == true)
+                code_C.selectionSort(lb_list_code, tang);
+        }
+        private void rad_insertion_sort_CheckedChanged(object sender, EventArgs e)
+        {
+            lb_list_code.Items.Clear();
+            if (rad_insertion_sort.Checked == true)
+                code_C.insertionSort(lb_list_code, tang);
+        }
+
+        private void rad_quicksort_CheckedChanged(object sender, EventArgs e)
+        {
+            lb_list_code.Items.Clear();
+            if (rad_quicksort.Checked == true)
+                code_C.quicksort(lb_list_code, tang);
+        }
+
+        private void rad_mergesort_CheckedChanged(object sender, EventArgs e)
+        {
+            lb_list_code.Items.Clear();
+            if (rad_mergesort.Checked == true)
+                code_C.mergeSort(lb_list_code, tang);
+        }
+
+        private void rad_heapsort_CheckedChanged(object sender, EventArgs e)
+        {
+            lb_list_code.Items.Clear();
+            if (rad_heapsort.Checked == true)
+                code_C.heapSort(lb_list_code, tang);
+        }
+
         #endregion
 
         #region CÁC HÀM DI CHUYỂN
@@ -996,14 +1065,16 @@ namespace quickSortapp
                     lb_list_code.SelectedIndex = 5;
                     set_node_color(node1[j], Properties.Resources.img_select); // Sét màu cho phần tử j đang xét
                     wait_time(toc_Do * 500);
-                    
+                   
                     lbl_left.Text = "j = " + j.ToString();
+                    lb_list_code.SelectedIndex = 6;
                     lbl_status.Text = "So sánh a[" + j.ToString() + "] và a[" + (j + 1).ToString() + "]";
                     wait_time(toc_Do * 1000);
 
                     if (a[j] > a[j + 1])
                     {
                         lbl_status.Text = "swap(a[" + j.ToString() + "] và a[" + (j + 1).ToString() + "])";
+                        lb_list_code.SelectedIndex = 8;
                         swap(ref a[j], ref a[j + 1]);
                         swap_Node(node1[j], node1[j + 1]);
                         swap_button(j, j + 1);
@@ -1052,12 +1123,14 @@ namespace quickSortapp
                     wait_time(toc_Do * 500);
 
                     lbl_left.Text = "j = " + j.ToString();
+                    lb_list_code.SelectedIndex = 6;
                     lbl_status.Text = "So sánh a[" + j.ToString() + "] và a[" + (j + 1).ToString() + "]";
                     wait_time(toc_Do * 1000);
 
                     if (a[j] < a[j + 1])
                     {
                         lbl_status.Text = "swap(a[" + j.ToString() + "] và a[" + (j + 1).ToString() + "])";
+                        lb_list_code.SelectedIndex = 8;
                         swap(ref a[j], ref a[j + 1]);
                         swap_Node(node1[j], node1[j + 1]);
                         swap_button(j, j + 1);
@@ -1097,15 +1170,23 @@ namespace quickSortapp
             int min;
             for (int i = 0; i < so_phan_tu - 1; i++)
             {
+                lbl_status.Text = "min = " + i.ToString();
                 min = i;
+                lb_list_code.SelectedIndex = 2;
+                wait_time(toc_Do * 1000);
+
+
                 for (int j = i; j < so_phan_tu; j++)
                 {
-                    if (a[j] < a[i])
+                    lbl_status.Text = "So sánh a[" + j.ToString() + "] và a[min]";
+                    if (a[j] < a[min])
                         min = j;
-                }
 
+                    wait_time(toc_Do * 500);
+                }
                 if (min != i)
                 {
+                    lbl_status.Text = "swap(a[" + i.ToString() + "] và a[min])";
                     swap(ref a[i], ref a[min]);
                     swap_Node(node1[i], node1[min]);
                     swap_button(i, min);
@@ -1116,7 +1197,7 @@ namespace quickSortapp
 
         #endregion
 
-        #region TÍNH NĂNG SẮP XẾP CLICK
+        #region KHU VỰC MENU ĐIỀU KHIỂN
         //private void btn_sapxep_Click(object sender, EventArgs e)
         //{
         //    if (da_Tao_GT)

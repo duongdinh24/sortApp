@@ -11,7 +11,6 @@ namespace quickSortapp
     {
 		public void heapSort(System.Windows.Forms.ListBox list_Code, Boolean tang)
         {
-			list_Code.Items.Add("// Ham vun dong cho mot dinh");
 			list_Code.Items.Add("void heapify(int arr[], int n, int i)");
 			list_Code.Items.Add("{");
 			list_Code.Items.Add("	int max = i;");
@@ -32,7 +31,6 @@ namespace quickSortapp
 			list_Code.Items.Add("	}");
 			list_Code.Items.Add("}");
 			list_Code.Items.Add("");
-			list_Code.Items.Add("// Ham sap xep vun dong");
 			list_Code.Items.Add("void heapSort(int arr[], int n)");
 			list_Code.Items.Add("{");
 			list_Code.Items.Add("	for (int i = n / 2 - 1; i >= 0; i--)");
@@ -46,7 +44,6 @@ namespace quickSortapp
 		}
 		public void mergeSort(System.Windows.Forms.ListBox list_Code, Boolean tang)
         {
-			list_Code.Items.Add("// ham merge");
 			list_Code.Items.Add("void merge(int a[], int p, int t, int n)");
 			list_Code.Items.Add("{");
 			list_Code.Items.Add("	int n1 = t - p + 1;");
@@ -91,7 +88,6 @@ namespace quickSortapp
 			list_Code.Items.Add("	}");
 			list_Code.Items.Add("}");
 			list_Code.Items.Add("");
-			list_Code.Items.Add("// MergeSort");
 			list_Code.Items.Add("void mergeSort(int a[], int first, int end)");
 			list_Code.Items.Add("{");
 			list_Code.Items.Add("	int t;");

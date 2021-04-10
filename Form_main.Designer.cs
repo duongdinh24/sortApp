@@ -253,6 +253,7 @@ namespace quickSortapp
             this.rad_heapsort.TabIndex = 5;
             this.rad_heapsort.Text = "Heap sort";
             this.rad_heapsort.UseVisualStyleBackColor = true;
+            this.rad_heapsort.CheckedChanged += new System.EventHandler(this.rad_heapsort_CheckedChanged);
             // 
             // rad_mergesort
             // 
@@ -263,6 +264,7 @@ namespace quickSortapp
             this.rad_mergesort.TabIndex = 4;
             this.rad_mergesort.Text = "Merge sort";
             this.rad_mergesort.UseVisualStyleBackColor = true;
+            this.rad_mergesort.CheckedChanged += new System.EventHandler(this.rad_mergesort_CheckedChanged);
             // 
             // rad_quicksort
             // 
@@ -273,6 +275,7 @@ namespace quickSortapp
             this.rad_quicksort.TabIndex = 3;
             this.rad_quicksort.Text = "Quick sort";
             this.rad_quicksort.UseVisualStyleBackColor = true;
+            this.rad_quicksort.CheckedChanged += new System.EventHandler(this.rad_quicksort_CheckedChanged);
             // 
             // rad_insertion_sort
             // 
@@ -283,6 +286,7 @@ namespace quickSortapp
             this.rad_insertion_sort.TabIndex = 2;
             this.rad_insertion_sort.Text = "Insertion sort";
             this.rad_insertion_sort.UseVisualStyleBackColor = true;
+            this.rad_insertion_sort.CheckedChanged += new System.EventHandler(this.rad_insertion_sort_CheckedChanged);
             // 
             // rad_selections_sort
             // 
@@ -293,6 +297,7 @@ namespace quickSortapp
             this.rad_selections_sort.TabIndex = 1;
             this.rad_selections_sort.Text = "Selection sort";
             this.rad_selections_sort.UseVisualStyleBackColor = true;
+            this.rad_selections_sort.CheckedChanged += new System.EventHandler(this.rad_selections_sort_CheckedChanged);
             // 
             // rad_bubblesort
             // 
@@ -305,6 +310,7 @@ namespace quickSortapp
             this.rad_bubblesort.TabStop = true;
             this.rad_bubblesort.Text = "Bubble sort";
             this.rad_bubblesort.UseVisualStyleBackColor = true;
+            this.rad_bubblesort.CheckedChanged += new System.EventHandler(this.rad_bubblesort_CheckedChanged);
             // 
             // rad_giam
             // 
@@ -329,7 +335,7 @@ namespace quickSortapp
             this.rad_tang.TabStop = true;
             this.rad_tang.Text = "Sắp xếp tăng";
             this.rad_tang.UseVisualStyleBackColor = true;
-            this.rad_tang.CheckedChanged += new System.EventHandler(this.Form_main_Load);
+            this.rad_tang.CheckedChanged += new System.EventHandler(this.rad_tang_CheckedChanged);
             // 
             // grb_control
             // 
