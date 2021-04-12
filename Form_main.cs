@@ -15,12 +15,11 @@ namespace quickSortapp
     public partial class Form_main : Form
     {
         #region KHAI BÁO BIẾN
-
         public static Button[] node1;   // Biến minh họa mảng
         public static int so_phan_tu;   // Số phần tử của mảng
         public static Label[] chiSo;   // Chỉ số vị trí của mảng
         public static int[] a;         // Mảng a
-        int toc_Do=1;                  // Tốc độ, tối đa 10 cấp
+        int toc_Do=2;                  // Tốc độ, tối đa 10 cấp
         Boolean tang = true;     // Kiểu sắp xếp
         Boolean da_Tao_Mang = false;
         Boolean da_Tao_GT = false;
@@ -967,14 +966,14 @@ namespace quickSortapp
                 while (j > 0 && x < a[j - 1])
                 {
                     a[j] = a[j - 1];
-                    lb_list_code.SelectedIndex = 8;
+                    lb_list_code.SelectedIndex = 9;
                     lbl_status.Text = "a[j] = a[j-1]";
 
                     to_right(node1[j - 1], j - 1, j);
                     swap_button(j-1, j);
                     wait_time(toc_Do *500);
 
-                    lb_list_code.SelectedIndex = 9;
+                    lb_list_code.SelectedIndex = 10;
                     j--;
                     lbl_status.Text = "j--";
                     lbl_left.Text = "j = " + j.ToString();
@@ -984,7 +983,7 @@ namespace quickSortapp
                 {
                     a[j] = x;
                     lbl_status.Text = "a[j] = x";
-                    lb_list_code.SelectedIndex = 11;
+                    lb_list_code.SelectedIndex = 12;
                     to_left(node_tam, i, j);
                     go_down(node_tam, j);
                     node1[j] = node_tam;
@@ -1023,14 +1022,14 @@ namespace quickSortapp
                 while (j > 0 && x > a[j - 1])
                 {
                     a[j] = a[j - 1];
-                    lb_list_code.SelectedIndex = 8;
+                    lb_list_code.SelectedIndex = 9;
                     lbl_status.Text = "a[j] = a[j-1]";
 
                     to_right(node1[j - 1], j - 1, j);
                     swap_button(j - 1, j);
                     wait_time(toc_Do * 500);
 
-                    lb_list_code.SelectedIndex = 9;
+                    lb_list_code.SelectedIndex = 10;
                     j--;
                     lbl_status.Text = "j--";
                     lbl_left.Text = "j = " + j.ToString();
@@ -1040,7 +1039,7 @@ namespace quickSortapp
                 {
                     a[j] = x;
                     lbl_status.Text = "a[j] = x";
-                    lb_list_code.SelectedIndex = 11;
+                    lb_list_code.SelectedIndex = 12;
                     to_left(node_tam, i, j);
                     go_down(node_tam, j);
                     node1[j] = node_tam;
@@ -1170,31 +1169,132 @@ namespace quickSortapp
             int min;
             for (int i = 0; i < so_phan_tu - 1; i++)
             {
-                lbl_status.Text = "min = " + i.ToString();
                 min = i;
+                lb_list_code.SelectedIndex = 5;
+                lbl_status.Text = "Tìm min a[" + i.ToString() + "] đến a[" + (so_phan_tu - 1).ToString() + "]";
+                lbl_pivot.Text = "min = " + i.ToString();
+                lbl_left.Text = "i   = " + i.ToString();
                 lb_list_code.SelectedIndex = 2;
+                set_node_color(node1[i], Properties.Resources.img_pivot);
                 wait_time(toc_Do * 1000);
 
-
-                for (int j = i; j < so_phan_tu; j++)
+                lb_list_code.SelectedIndex = 6;
+                for (int j = i+1; j < so_phan_tu; j++)
                 {
                     lbl_status.Text = "So sánh a[" + j.ToString() + "] và a[min]";
+                    lbl_right.Text = "j   = " + j.ToString();
+                    set_node_color(node1[j], Properties.Resources.img_select);
+                    lb_list_code.SelectedIndex = 7;
+                    wait_time(toc_Do * 1000);
                     if (a[j] < a[min])
-                        min = j;
-
-                    wait_time(toc_Do * 500);
+                    {
+                        lb_list_code.SelectedIndex = 8;
+                        lbl_pivot.Text = "min = " + j.ToString();
+                        lbl_status.Text = "min = " + j.ToString();
+                        if (min == i)
+                        {
+                            min = j;
+                            set_node_color(node1[j], Properties.Resources.img_pivot);
+                        }
+                        else
+                        {
+                            set_node_color(node1[min], Properties.Resources.img_simple);
+                            min = j;
+                            set_node_color(node1[j], Properties.Resources.img_pivot);
+                        }
+                        wait_time(toc_Do * 500);
+                    }
+                    else
+                    {
+                        set_node_color(node1[j], Properties.Resources.img_simple);
+                    }
+                    lbl_status.Text = "j++";
+                    wait_time(toc_Do * 1000);
                 }
+                lb_list_code.SelectedIndex = 9;
                 if (min != i)
                 {
                     lbl_status.Text = "swap(a[" + i.ToString() + "] và a[min])";
+                    lb_list_code.SelectedIndex = 10;
                     swap(ref a[i], ref a[min]);
                     swap_Node(node1[i], node1[min]);
                     swap_button(i, min);
+                    set_node_color(node1[i], Properties.Resources.img_done);
+                    set_node_color(node1[min], Properties.Resources.img_simple);
+                    wait_time(toc_Do * 1000);
                 }
-                    
+
+                set_node_color(node1[i], Properties.Resources.img_done);
+                lbl_status.Text = "i++";
+                lb_list_code.SelectedIndex = 3;
             }
         }
+        // Hàm sắp xếp node giảm
+        public void selection_Sort_node_decrease()
+        {
+            int max;
+            for (int i = 0; i < so_phan_tu - 1; i++)
+            {
+                max = i;
+                lb_list_code.SelectedIndex = 5;
+                lbl_status.Text = "Tìm max a[" + i.ToString() + "] đến a[" + (so_phan_tu - 1).ToString() + "]";
+                lbl_pivot.Text = "max = " + i.ToString();
+                lbl_left.Text = "i   = " + i.ToString();
+                lb_list_code.SelectedIndex = 2;
+                set_node_color(node1[i], Properties.Resources.img_pivot);
+                wait_time(toc_Do * 1000);
 
+                lb_list_code.SelectedIndex = 6;
+                for (int j = i + 1; j < so_phan_tu; j++)
+                {
+                    lbl_status.Text = "So sánh a[" + j.ToString() + "] và a[min]";
+                    lbl_right.Text = "j   = " + j.ToString();
+                    set_node_color(node1[j], Properties.Resources.img_select);
+                    lb_list_code.SelectedIndex = 7;
+                    wait_time(toc_Do * 1000);
+                    if (a[j] > a[max])
+                    {
+                        lb_list_code.SelectedIndex = 8;
+                        lbl_pivot.Text = "max = " + j.ToString();
+                        lbl_status.Text = "max = " + j.ToString();
+                        if (max == i)
+                        {
+                            max = j;
+                            set_node_color(node1[j], Properties.Resources.img_pivot);
+                        }
+                        else
+                        {
+                            set_node_color(node1[max], Properties.Resources.img_simple);
+                            max = j;
+                            set_node_color(node1[j], Properties.Resources.img_pivot);
+                        }
+                        wait_time(toc_Do * 500);
+                    }
+                    else
+                    {
+                        set_node_color(node1[j], Properties.Resources.img_simple);
+                    }
+                    lbl_status.Text = "j++";
+                    wait_time(toc_Do * 1000);
+                }
+                lb_list_code.SelectedIndex = 9;
+                if (max != i)
+                {
+                    lbl_status.Text = "swap(a[" + i.ToString() + "] và a[min])";
+                    lb_list_code.SelectedIndex = 10;
+                    swap(ref a[i], ref a[max]);
+                    swap_Node(node1[i], node1[max]);
+                    swap_button(i, max);
+                    set_node_color(node1[i], Properties.Resources.img_done);
+                    set_node_color(node1[max], Properties.Resources.img_simple);
+                    wait_time(toc_Do * 1000);
+                }
+
+                set_node_color(node1[i], Properties.Resources.img_done);
+                lbl_status.Text = "i++";
+                lb_list_code.SelectedIndex = 3;
+            }
+        }
         #endregion
 
         #region KHU VỰC MENU ĐIỀU KHIỂN
@@ -1219,8 +1319,14 @@ namespace quickSortapp
         //        complete();
         //    }
         //}
-
         private void btn_sapxep_Click(object sender, EventArgs e)
+        {
+
+            Thread th1 = new Thread(startsort);
+            th1.IsBackground = true;
+            th1.Start();
+        }
+        void startsort()
         {
             if (rad_tang.Checked == true)
                 tang = true;
@@ -1240,10 +1346,10 @@ namespace quickSortapp
                         quickSort_Node_increase(0, so_phan_tu - 1);
                     else
                         quickSort_Node_decrease(0, so_phan_tu - 1);
-                    
+
                 }
 
-                if(rad_insertion_sort.Checked == true)
+                if (rad_insertion_sort.Checked == true)
                 {
                     if (tang)
                         insertion_Sort_Node();
@@ -1252,13 +1358,22 @@ namespace quickSortapp
 
 
                 }
-                if(rad_bubblesort.Checked == true)
+                if (rad_bubblesort.Checked == true)
                 {
                     if (tang)
                         bubble_Sort_node();
                     else
                         bubble_Sort_node_decrease();
                 }
+                if (rad_selections_sort.Checked == true)
+                {
+                    if (tang)
+                        selection_Sort_node();
+                    else
+                        selection_Sort_node_decrease();
+                }
+
+
                 complete();
             }
 
@@ -1266,14 +1381,14 @@ namespace quickSortapp
             {
                 complete();
             }
-
         }
-        #endregion
 
         private void btn_break_Click(object sender, EventArgs e)
         {
             selection_Sort_node();
             //complete();
         }
+
+        #endregion
     }
 }
