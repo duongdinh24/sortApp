@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "quickSortapp", "quickSortapp.csproj", "{BF58B9D9-8A40-4301-836D-38D135E9D727}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "demo_sort", "..\..\codeC#\codeC#\demo_sort\demo_sort.csproj", "{0A9F4AF3-8FA2-4631-A703-E35D8B4A7F0A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +21,6 @@ Global
 		{BF58B9D9-8A40-4301-836D-38D135E9D727}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF58B9D9-8A40-4301-836D-38D135E9D727}.Release|x86.ActiveCfg = Release|Any CPU
 		{BF58B9D9-8A40-4301-836D-38D135E9D727}.Release|x86.Build.0 = Release|Any CPU
-		{0A9F4AF3-8FA2-4631-A703-E35D8B4A7F0A}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{0A9F4AF3-8FA2-4631-A703-E35D8B4A7F0A}.Debug|x86.ActiveCfg = Debug|x86
-		{0A9F4AF3-8FA2-4631-A703-E35D8B4A7F0A}.Debug|x86.Build.0 = Debug|x86
-		{0A9F4AF3-8FA2-4631-A703-E35D8B4A7F0A}.Release|Any CPU.ActiveCfg = Release|x86
-		{0A9F4AF3-8FA2-4631-A703-E35D8B4A7F0A}.Release|x86.ActiveCfg = Release|x86
-		{0A9F4AF3-8FA2-4631-A703-E35D8B4A7F0A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

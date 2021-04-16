@@ -63,8 +63,6 @@ namespace quickSortapp
             rad_giam.Enabled = true;
             rad_tang.Enabled = true;
             btn_pause.Visible = false;
-            rad_heapsort.Visible = false;
-            rad_mergesort.Visible = false;
         }
 
         private void Form_main_Load(object sender, EventArgs e)
@@ -496,14 +494,24 @@ namespace quickSortapp
         {
             lb_list_code.Items.Clear();
             if (rad_mergesort.Checked == true)
+            {
                 code_C.mergeSort(lb_list_code, tang);
+                MessageBox.Show("Chức năng đang phát triển");
+                rad_bubblesort.Checked = true;
+            }
+
         }
 
         private void rad_heapsort_CheckedChanged(object sender, EventArgs e)
         {
             lb_list_code.Items.Clear();
             if (rad_heapsort.Checked == true)
+            {
                 code_C.heapSort(lb_list_code, tang);
+                MessageBox.Show("Chức năng đang phát triển");
+                rad_bubblesort.Checked = true;
+            }
+                
         }
 
         private void ckb_tungbuoc_CheckedChanged(object sender, EventArgs e)
