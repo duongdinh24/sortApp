@@ -35,7 +35,7 @@ namespace quickSortapp
                 txt_index.Text = "0";
                 return;
             }
-            if (index > Form_main.so_phan_tu -1)
+            if (index > Form_main.so_phan_tu -1 || index < 0)
             {
                 MessageBox.Show("Không có phần tử thứ "+ index);
                 txt_index.Text ="0";

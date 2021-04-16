@@ -28,6 +28,7 @@ namespace quickSortapp
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_main));
             this.lbl_Tieude = new System.Windows.Forms.Label();
             this.grb_khoitaomang = new System.Windows.Forms.GroupBox();
             this.btn_taomang = new System.Windows.Forms.Button();
@@ -41,7 +42,7 @@ namespace quickSortapp
             this.grb_khoitaodulieu = new System.Windows.Forms.GroupBox();
             this.lb_list_code = new System.Windows.Forms.ListBox();
             this.grb_codec = new System.Windows.Forms.GroupBox();
-            this.zoomcode = new DevExpress.XtraEditors.ZoomTrackBarControl();
+            this.zoomCode = new System.Windows.Forms.TrackBar();
             this.grb_whichsort = new System.Windows.Forms.GroupBox();
             this.rad_heapsort = new System.Windows.Forms.RadioButton();
             this.rad_mergesort = new System.Windows.Forms.RadioButton();
@@ -52,6 +53,8 @@ namespace quickSortapp
             this.rad_giam = new System.Windows.Forms.RadioButton();
             this.rad_tang = new System.Windows.Forms.RadioButton();
             this.grb_control = new System.Windows.Forms.GroupBox();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.btn_pause = new System.Windows.Forms.Button();
             this.btn_sapxep = new System.Windows.Forms.Button();
             this.btn_break = new System.Windows.Forms.Button();
             this.ckb_tungbuoc = new System.Windows.Forms.CheckBox();
@@ -61,21 +64,22 @@ namespace quickSortapp
             this.lbl_pivot = new System.Windows.Forms.Label();
             this.lbl_left = new System.Windows.Forms.Label();
             this.lbl_right = new System.Windows.Forms.Label();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.grb_khoitaomang.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmr_sophantu)).BeginInit();
             this.grb_taogt.SuspendLayout();
             this.grb_khoitaodulieu.SuspendLayout();
             this.grb_codec.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zoomcode)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.zoomcode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomCode)).BeginInit();
             this.grb_whichsort.SuspendLayout();
             this.grb_control.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_Tieude
             // 
             this.lbl_Tieude.Font = new System.Drawing.Font("Consolas", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Tieude.ForeColor = System.Drawing.Color.Black;
+            this.lbl_Tieude.ForeColor = System.Drawing.Color.IndianRed;
             this.lbl_Tieude.Location = new System.Drawing.Point(289, 9);
             this.lbl_Tieude.Name = "lbl_Tieude";
             this.lbl_Tieude.Size = new System.Drawing.Size(779, 191);
@@ -199,34 +203,34 @@ namespace quickSortapp
             // 
             // lb_list_code
             // 
-            this.lb_list_code.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_list_code.Font = new System.Drawing.Font("Consolas", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_list_code.FormattingEnabled = true;
-            this.lb_list_code.ItemHeight = 20;
-            this.lb_list_code.Location = new System.Drawing.Point(1, 60);
+            this.lb_list_code.ItemHeight = 15;
+            this.lb_list_code.Location = new System.Drawing.Point(0, 67);
             this.lb_list_code.Name = "lb_list_code";
-            this.lb_list_code.Size = new System.Drawing.Size(626, 204);
+            this.lb_list_code.Size = new System.Drawing.Size(626, 199);
             this.lb_list_code.TabIndex = 53;
             // 
             // grb_codec
             // 
-            this.grb_codec.Controls.Add(this.zoomcode);
+            this.grb_codec.Controls.Add(this.zoomCode);
             this.grb_codec.Controls.Add(this.lb_list_code);
             this.grb_codec.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grb_codec.Location = new System.Drawing.Point(315, 469);
             this.grb_codec.Name = "grb_codec";
-            this.grb_codec.Size = new System.Drawing.Size(646, 266);
+            this.grb_codec.Size = new System.Drawing.Size(609, 266);
             this.grb_codec.TabIndex = 54;
             this.grb_codec.TabStop = false;
             this.grb_codec.Text = "Code C/C++";
             // 
-            // zoomcode
+            // zoomCode
             // 
-            this.zoomcode.EditValue = null;
-            this.zoomcode.Location = new System.Drawing.Point(6, 36);
-            this.zoomcode.Name = "zoomcode";
-            this.zoomcode.Size = new System.Drawing.Size(621, 18);
-            this.zoomcode.TabIndex = 54;
-            this.zoomcode.EditValueChanged += new System.EventHandler(this.zoomcode_EditValueChanged);
+            this.zoomCode.AutoSize = false;
+            this.zoomCode.Location = new System.Drawing.Point(0, 37);
+            this.zoomCode.Name = "zoomCode";
+            this.zoomCode.Size = new System.Drawing.Size(609, 29);
+            this.zoomCode.TabIndex = 54;
+            this.zoomCode.Scroll += new System.EventHandler(this.zoomCode_Scroll);
             // 
             // grb_whichsort
             // 
@@ -237,7 +241,7 @@ namespace quickSortapp
             this.grb_whichsort.Controls.Add(this.rad_selections_sort);
             this.grb_whichsort.Controls.Add(this.rad_bubblesort);
             this.grb_whichsort.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grb_whichsort.Location = new System.Drawing.Point(948, 471);
+            this.grb_whichsort.Location = new System.Drawing.Point(930, 471);
             this.grb_whichsort.Name = "grb_whichsort";
             this.grb_whichsort.Size = new System.Drawing.Size(215, 266);
             this.grb_whichsort.TabIndex = 55;
@@ -339,18 +343,41 @@ namespace quickSortapp
             // 
             // grb_control
             // 
+            this.grb_control.Controls.Add(this.trackBar1);
+            this.grb_control.Controls.Add(this.btn_pause);
             this.grb_control.Controls.Add(this.btn_sapxep);
             this.grb_control.Controls.Add(this.btn_break);
             this.grb_control.Controls.Add(this.rad_giam);
             this.grb_control.Controls.Add(this.rad_tang);
             this.grb_control.Controls.Add(this.ckb_tungbuoc);
             this.grb_control.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grb_control.Location = new System.Drawing.Point(1169, 470);
+            this.grb_control.Location = new System.Drawing.Point(1144, 471);
             this.grb_control.Name = "grb_control";
-            this.grb_control.Size = new System.Drawing.Size(200, 265);
+            this.grb_control.Size = new System.Drawing.Size(225, 264);
             this.grb_control.TabIndex = 56;
             this.grb_control.TabStop = false;
             this.grb_control.Text = "Điều khiển";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.AutoSize = false;
+            this.trackBar1.Location = new System.Drawing.Point(180, 13);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar1.Size = new System.Drawing.Size(39, 251);
+            this.trackBar1.TabIndex = 10;
+            this.trackBar1.Value = 4;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // btn_pause
+            // 
+            this.btn_pause.Image = global::quickSortapp.Properties.Resources.img_pause;
+            this.btn_pause.Location = new System.Drawing.Point(72, 140);
+            this.btn_pause.Name = "btn_pause";
+            this.btn_pause.Size = new System.Drawing.Size(54, 54);
+            this.btn_pause.TabIndex = 5;
+            this.btn_pause.UseVisualStyleBackColor = true;
+            this.btn_pause.Click += new System.EventHandler(this.btn_pause_Click);
             // 
             // btn_sapxep
             // 
@@ -384,14 +411,16 @@ namespace quickSortapp
             this.ckb_tungbuoc.TabIndex = 0;
             this.ckb_tungbuoc.Text = "Chạy từng bước";
             this.ckb_tungbuoc.UseVisualStyleBackColor = true;
+            this.ckb_tungbuoc.CheckedChanged += new System.EventHandler(this.ckb_tungbuoc_CheckedChanged);
             // 
             // lbl_status
             // 
             this.lbl_status.AutoSize = true;
-            this.lbl_status.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_status.Font = new System.Drawing.Font("Consolas", 16.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_status.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lbl_status.Location = new System.Drawing.Point(415, 9);
             this.lbl_status.Name = "lbl_status";
-            this.lbl_status.Size = new System.Drawing.Size(97, 29);
+            this.lbl_status.Size = new System.Drawing.Size(111, 34);
             this.lbl_status.TabIndex = 57;
             this.lbl_status.Text = "Status";
             this.lbl_status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -400,6 +429,7 @@ namespace quickSortapp
             // 
             this.lbl_mangA.AutoSize = true;
             this.lbl_mangA.Font = new System.Drawing.Font("Consolas", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_mangA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lbl_mangA.Location = new System.Drawing.Point(20, 150);
             this.lbl_mangA.Name = "lbl_mangA";
             this.lbl_mangA.Size = new System.Drawing.Size(70, 51);
@@ -410,6 +440,7 @@ namespace quickSortapp
             // 
             this.lbl_index.AutoSize = true;
             this.lbl_index.Font = new System.Drawing.Font("Consolas", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_index.ForeColor = System.Drawing.Color.Red;
             this.lbl_index.Location = new System.Drawing.Point(20, 350);
             this.lbl_index.Name = "lbl_index";
             this.lbl_index.Size = new System.Drawing.Size(125, 38);
@@ -463,7 +494,9 @@ namespace quickSortapp
             this.Controls.Add(this.grb_codec);
             this.Controls.Add(this.grb_khoitaodulieu);
             this.Controls.Add(this.lbl_Tieude);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form_main";
             this.ShowInTaskbar = false;
@@ -476,13 +509,12 @@ namespace quickSortapp
             this.grb_taogt.ResumeLayout(false);
             this.grb_khoitaodulieu.ResumeLayout(false);
             this.grb_codec.ResumeLayout(false);
-            this.grb_codec.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zoomcode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.zoomcode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomCode)).EndInit();
             this.grb_whichsort.ResumeLayout(false);
             this.grb_whichsort.PerformLayout();
             this.grb_control.ResumeLayout(false);
             this.grb_control.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -502,7 +534,6 @@ namespace quickSortapp
         private System.Windows.Forms.Button btn_taomang;
         private System.Windows.Forms.ListBox lb_list_code;
         private System.Windows.Forms.GroupBox grb_codec;
-        private DevExpress.XtraEditors.ZoomTrackBarControl zoomcode;
         private System.Windows.Forms.GroupBox grb_whichsort;
         private System.Windows.Forms.RadioButton rad_giam;
         private System.Windows.Forms.RadioButton rad_tang;
@@ -523,5 +554,9 @@ namespace quickSortapp
         private System.Windows.Forms.RadioButton rad_bubblesort;
         private System.Windows.Forms.Button btn_break;
         private System.Windows.Forms.Button btn_sapxep;
+        private System.Windows.Forms.Button btn_pause;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar zoomCode;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
