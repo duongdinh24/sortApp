@@ -260,32 +260,40 @@ namespace quickSortapp
             StreamReader re = File.OpenText("mangA.txt");
             string input =null;
             int i = 0;
-            while ((input = re.ReadLine()) != null)
+            while ((input = re.ReadLine()) != null && i < so_phan_tu)
             {
-                try
-                {
-                    a[i] = Convert.ToInt32(input);
-                    node1[i].Text = a[i].ToString();
-                    i++;
-                }
-                catch
-                {
-                    MessageBox.Show("Sô lượng phần tử trong file nhiều hơn " + so_phan_tu.ToString());
-                    reset_node();
-                    nmr_sophantu.Focus();
-                    return;
-                }
+                a[i] = Convert.ToInt32(input);
+                node1[i].Text = a[i].ToString();
+                i++;
+                //try
+                //{
+                //    a[i] = Convert.ToInt32(input);
+                //    node1[i].Text = a[i].ToString();
+                //    i++;
+                //}
+                //catch
+                //{
+                //    MessageBox.Show("Sô lượng phần tử trong file nhiều hơn " + so_phan_tu.ToString());
+                //    reset_node();
+                //    nmr_sophantu.Focus();
+                //    return;
+                //}
 
 
             }
             re.Close();
+
             if(i < so_phan_tu)
             {
-                MessageBox.Show("Số lượng phần tử trong file ít hơn "+ so_phan_tu.ToString());
-                nmr_sophantu.Focus();
-                reset_node();
-                return;
+                Random rd = new Random();
+                while (i < so_phan_tu)
+                {
+                    a[i] = rd.Next(20);
+                    node1[i].Text = a[i].ToString();
+                    i++;
+                }
             }
+
             // Mở các nút
             rad_tang.Enabled = true;
             rad_giam.Enabled = true;
